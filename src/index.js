@@ -6,7 +6,7 @@ import styles from './Index.module.less';
 
 ReactDOM.render(
     <React.StrictMode>
-        <div className={styles.container}>
+        <div >
             <App />
         </div>
     </React.StrictMode>,
