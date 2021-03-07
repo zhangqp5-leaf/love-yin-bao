@@ -1,6 +1,7 @@
 {
   "name": "unicom-fe",
   "version": "0.1.0",
+  "homepage": "https://loquatlo.gitee.io/love-yin-bao",
   "private": true,
   "scripts": {
     "start": "craco start",
@@ -12,7 +13,9 @@
     "lint:js": "node_modules/eslint/bin/eslint.js --ext .js,.jsx ./src",
     "lint:style:fix": "stylelint --fix \"src/**/*.less\" --syntax less",
     "lint:js:fix": "node_modules/eslint/bin/eslint.js --fix --ext .js,.jsx ./src",
-    "lint:fix": "npm run lint:style:fix && npm run lint:js:fix"
+    "lint:fix": "npm run lint:style:fix && npm run lint:js:fix",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "npm run lint:js:fix",
@@ -45,6 +48,7 @@
     "craco-less": "^1.17.1",
     "echarts": "^5.0.2",
     "echarts-for-react": "^3.0.0",
+    "gh-pages": "^3.1.0",
     "react": "^17.0.1",
     "react-bmapgl": "^0.1.4",
     "react-dom": "^17.0.1",

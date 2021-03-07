@@ -41,12 +41,23 @@ export default class App extends Component {
         let second1 = Math.floor(leftSecond - day1 * 24 * 60 * 60 - hour1 * 3600 - minute1 * 60);
         // console.log(day1)
         return (
-            <div className={styles.container}>
-                <div className={styles.appStyle} style={{fontSize: 28}}>
-                    和尹宝在一起已经
+            <div>
+                <div className={styles.appTextStyle}>
+                    {/* 和尹宝在一起已经 */}
+                    <p style={{display: 'inline-block', fontSize: '100%'}}>和尹宝在一起已经</p>
                 </div>
-                <div>
-                    {day1} 天 {hour1} 小时 {minute1} 分钟 {second1} 秒
+                <div className={styles.appTimeStyle}>
+                    {/* {day1} 天 {hour1} 小时 {minute1} 分钟 */}
+                    <p style={{display: 'inline-block', fontSize: '100%'}}>{day1}</p>
+                    <p style={{display: 'inline-block', fontSize: '35%'}}>天</p>
+                    <p style={{display: 'inline-block', fontSize: '100%'}}>{hour1}</p>
+                    <p style={{display: 'inline-block', fontSize: '35%'}}>小时</p>
+                    <p style={{display: 'inline-block', fontSize: '100%'}}>{minute1}</p>
+                    <p style={{display: 'inline-block', fontSize: '35%'}}>分钟</p>
+                </div>
+                <div className={styles.appSecondStyle}>
+                    <p style={{display: 'inline-block', fontSize: '100%'}}>{second1}</p>
+                    <p style={{display: 'inline-block', fontSize: '35%'}}>秒</p>
                 </div>
             </div>
         );
