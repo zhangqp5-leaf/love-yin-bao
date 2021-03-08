@@ -1,17 +1,14 @@
 import React, {Component} from 'react';
+import {Button} from 'antd';
 
 import styles from './App.module.less';
-// import Background from './img/1037400.png';
-import Background from './img/wallhaven-g85vp3.jpg';
+import Background1 from './img/1037400.png';
+import Background2 from './img/wallhaven-g85vp3.jpg';
+import Background3 from './img/1033113.png';
+import Background4 from './img/499590.jpg';
+import Background5 from './img/501188.jpg';
 
-var sectionStyle = {
-    // width: '1920px',
-    // height: '1080px',
-    width: '100%',
-    height: '940px',
-    // backgroundSize: 'cover',
-    backgroundImage: `url(${Background})`,
-};
+const backgroundList = [Background1, Background2, Background3, Background4, Background5];
 
 export default class App extends Component {
 
@@ -19,7 +16,9 @@ export default class App extends Component {
         super(props);
         this.state = {
             date: new Date(),
+            Background: Background2,
         };
+        this.handleClickChangeBackground = this.handleClickChangeBackground.bind(this);
     }
 
     componentDidMount() {
@@ -39,9 +38,18 @@ export default class App extends Component {
         });
     }
 
-
+    handleClickChangeBackground() {
+        this.setState({
+            Background: backgroundList[Math.floor(Math.random() * backgroundList.length)],
+        });
+    }
 
     render() {
+        const sectionStyle = {
+            width: '100%',
+            height: '940px',
+            backgroundImage: `url(${this.state.Background})`,
+        };
         let startTime = new Date(2021, 1, 11, 23, 58);
         let endTime = new Date();
         let leftTime = endTime.getTime() - startTime.getTime();
@@ -52,7 +60,7 @@ export default class App extends Component {
         let second1 = Math.floor(leftSecond - day1 * 24 * 60 * 60 - hour1 * 3600 - minute1 * 60);
         // console.log(day1)
         return (
-            <div style={sectionStyle} className={styles.container}>
+            <div className={styles.container} style={sectionStyle}>
                 <div className={styles.appTotleStyle}>
                     <div className={styles.appTextStyle}>
                         <div style={{display: 'inline-block', fontSize: '100%'}}>和尹宝在一起</div>
@@ -70,6 +78,7 @@ export default class App extends Component {
                         <div style={{display: 'inline-block', fontSize: '100%'}}>{second1}</div>
                         <div style={{display: 'inline-block', fontSize: '35%'}}>秒</div>
                     </div>
+                    <Button onClick={this.handleClickChangeBackground}>点我</Button>
                 </div>
             </div>
         );
