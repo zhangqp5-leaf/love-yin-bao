@@ -69,8 +69,8 @@ export default class App extends Component {
         let minute1 = Math.floor((leftSecond - day1 * 24 * 60 * 60 - hour1 * 3600) / 60);
         let second1 = Math.floor(leftSecond - day1 * 24 * 60 * 60 - hour1 * 3600 - minute1 * 60);
         // console.log(day1)
-        console.log(this.state.backgroundList);
-        console.log(this.state.Background);
+        // console.log(this.state.backgroundList);
+        // console.log(this.state.Background);
         return (
             <div className={styles.container} style={sectionStyle}>
                 <div className={styles.appTotleStyle}>
