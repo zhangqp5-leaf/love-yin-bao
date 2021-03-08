@@ -1,9 +1,8 @@
-# 三大资源可视-前端
+## 两人的小小项目
 
-## 如何开发
 克隆代码库，进入目录
 ```bash
-$ git clone https://github.com/resource-visualization/fe.git
+$ git clone https://gitee.com/loquatlo/love-yin-bao.git
 $ cd fe
 ```
 
