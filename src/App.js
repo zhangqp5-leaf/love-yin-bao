@@ -8,7 +8,7 @@ import Background3 from './img/1033113.png';
 import Background4 from './img/499590.jpg';
 import Background5 from './img/501188.jpg';
 
-const backgroundList = [Background1, Background2, Background3, Background4, Background5];
+// const backgroundList = [Background1, Background2, Background3, Background4, Background5];
 
 export default class App extends Component {
 
@@ -17,6 +17,7 @@ export default class App extends Component {
         this.state = {
             date: new Date(),
             Background: Background2,
+            backgroundList: [Background1, Background2, Background3, Background4, Background5],
         };
         this.handleClickChangeBackground = this.handleClickChangeBackground.bind(this);
     }
@@ -39,8 +40,17 @@ export default class App extends Component {
     }
 
     handleClickChangeBackground() {
+        for (var i = 0; i < this.state.backgroundList.length; i++) {
+            if (this.state.backgroundList[i] === this.state.Background) {
+                this.setState({
+                    backgroundList: this.state.backgroundList.splice(i, 1),
+                });
+            }
+        };
+        let BackgroundCopy = this.state.Background;
         this.setState({
-            Background: backgroundList[Math.floor(Math.random() * backgroundList.length)],
+            Background: this.state.backgroundList[Math.floor(Math.random() * this.state.backgroundList.length)],
+            backgroundList: [...this.state.backgroundList, BackgroundCopy],
         });
     }
 
@@ -59,6 +69,8 @@ export default class App extends Component {
         let minute1 = Math.floor((leftSecond - day1 * 24 * 60 * 60 - hour1 * 3600) / 60);
         let second1 = Math.floor(leftSecond - day1 * 24 * 60 * 60 - hour1 * 3600 - minute1 * 60);
         // console.log(day1)
+        console.log(this.state.backgroundList);
+        console.log(this.state.Background);
         return (
             <div className={styles.container} style={sectionStyle}>
                 <div className={styles.appTotleStyle}>
