@@ -139,7 +139,7 @@ export default class App extends Component {
                 <div className={styles.container}>
                     <div className={styles.appTotleStyle}>
                         <StopWatch />
-                        <Button onClick={this.handleClickChangeBackground}>点我</Button>
+                        <Button onClick={this.handleClickChangeBackground}>爱我你就点点我(*^_^*)</Button>
                         <Input
                             placeholder='say something'
                             style={{width: 300, marginLeft: 10, marginRight: 5}}
@@ -147,7 +147,7 @@ export default class App extends Component {
                             onChange={this.handleMessageInputChange}
                             onKeyPress={this.messageBoardKey}
                         />
-                        <Button onClick={this.handleMessageBtnChange}>提交</Button>
+                        <Button onClick={this.handleMessageBtnChange}>不爱你也点点我(*^_^*)</Button>
                         <List
                             style={{width: 400, margin: 'auto', marginTop: 8}}
                             bordered
