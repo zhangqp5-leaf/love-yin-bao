@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Button, Input, List} from 'antd';
 import {CSSTransition} from 'react-transition-group';
+import StopWatch from './Components/StopWatch';
+import Music from './Components/Music';
 
 import styles from './App.module.less';
 import './App.css';
@@ -41,14 +43,11 @@ import messageBoardData from './data/messageBoard.json';
 //     });
 // }
 
-
-
 export default class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            date: new Date(),
             isShowBackground: false,
             Background: Background2,
             backgroundList: [Background1, Background2, Background3, Background4, Background5, Background6, Background7, Background8],
@@ -62,10 +61,6 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        this.timerID = setInterval(
-            () => this.tick(),
-            1000
-        );
         // 读取json文件数据
         this.setState({
             messageBoardList: messageBoardData,
@@ -73,15 +68,6 @@ export default class App extends Component {
         // writeJson(params); // 执行一下;
     }
 
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
-
-    tick() {
-        this.setState({
-            date: new Date(),
-        });
-    }
     // 切换背景图片事件
     handleClickChangeBackground() {
         for (var i = 0; i < this.state.backgroundList.length; i++) {
@@ -133,20 +119,12 @@ export default class App extends Component {
             height: '940px',
             backgroundImage: `url(${this.state.Background})`,
         };
-        let startTime = new Date(2021, 1, 11, 23, 58);
-        let endTime = new Date();
-        let leftTime = endTime.getTime() - startTime.getTime();
-        let leftSecond = parseInt(leftTime / 1000);
-        let day1 = Math.floor(leftSecond / (60 * 60 * 24));
-        let hour1 = Math.floor((leftSecond - day1 * 24 * 60 * 60) / 3600);
-        let minute1 = Math.floor((leftSecond - day1 * 24 * 60 * 60 - hour1 * 3600) / 60);
-        let second1 = Math.floor(leftSecond - day1 * 24 * 60 * 60 - hour1 * 3600 - minute1 * 60);
         // console.log(day1)
         // console.log(this.state.backgroundList);
         // console.log(this.state.Background);
         // console.log(this.state.isShowBackground);
         return (
-            <div>
+            <Fragment>
                 {/* 背景图片切换样式 */}
                 <CSSTransition
                     in={this.state.isShowBackground}
@@ -160,23 +138,8 @@ export default class App extends Component {
                 </CSSTransition>
                 <div className={styles.container}>
                     <div className={styles.appTotleStyle}>
-                        <div className={styles.appTextStyle}>
-                            <div style={{display: 'inline-block', fontSize: '100%'}}>和尹宝在一起</div>
-                            <div style={{display: 'inline-block', fontSize: '100%'}}>已经</div>
-                        </div>
-                        <div className={styles.appTimeStyle}>
-                            <div style={{display: 'inline-block', fontSize: '100%'}}>{day1}</div>
-                            <div style={{display: 'inline-block', fontSize: '35%'}}>天</div>
-                            <div style={{display: 'inline-block', fontSize: '100%'}}>{hour1}</div>
-                            <div style={{display: 'inline-block', fontSize: '35%'}}>小时</div>
-                            <div style={{display: 'inline-block', fontSize: '100%'}}>{minute1}</div>
-                            <div style={{display: 'inline-block', fontSize: '35%'}}>分钟</div>
-                        </div>
-                        <div className={styles.appSecondStyle}>
-                            <div style={{display: 'inline-block', fontSize: '100%'}}>{second1}</div>
-                            <div style={{display: 'inline-block', fontSize: '35%'}}>秒</div>
-                        </div>
-                        <Button onClick={this.handleClickChangeBackground}>爱我你就点点我(*^_^*)</Button>
+                        <StopWatch />
+                        <Button onClick={this.handleClickChangeBackground}>点我</Button>
                         <Input
                             placeholder='say something'
                             style={{width: 300, marginLeft: 10, marginRight: 5}}
@@ -184,7 +147,7 @@ export default class App extends Component {
                             onChange={this.handleMessageInputChange}
                             onKeyPress={this.messageBoardKey}
                         />
-                        <Button onClick={this.handleMessageBtnChange}>不爱你也点点我(*^_^*)</Button>
+                        <Button onClick={this.handleMessageBtnChange}>提交</Button>
                         <List
                             style={{width: 400, margin: 'auto', marginTop: 8}}
                             bordered
@@ -192,8 +155,9 @@ export default class App extends Component {
                             renderItem={item => <List.Item>{item}</List.Item>}
                         />
                     </div>
+                    <Music />
                 </div>
-            </div>
+            </Fragment>
         );
     }
 }
