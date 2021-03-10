@@ -6,6 +6,18 @@ export default class MusicBase extends Component {
     }
 
     render() {
+        if (this.props.musicName === '想见你想见你想见你') {
+            return (
+                <audio
+                    src="http://music.163.com/song/media/outer/url?id=1403215687.mp3"
+                    // controls='controls'
+                    autoPlay='autoplay'
+                    loop='loop'
+                    type='audio/mpeg'
+                >
+                </audio>
+            );
+        }
         if (this.props.musicName === '吉森信 - ゆるやかな畦道で') {
             return (
                 <audio

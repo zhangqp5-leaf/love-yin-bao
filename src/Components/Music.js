@@ -15,7 +15,12 @@ export default class Music extends Component {
         super(props);
         this.state = {
             musicName: '',
-            musicList: ['吉森信 - ゆるやかな畦道で', '梦中的婚礼', '倉木麻衣 - 渡月橋 ～君 想ふ～'],
+            musicList: [
+                '想见你想见你想见你',
+                '吉森信 - ゆるやかな畦道で',
+                '梦中的婚礼',
+                '倉木麻衣 - 渡月橋 ～君 想ふ～',
+            ],
             showMusicList: false,
         };
         this.handleClickStopPlay = this.handleClickStopPlay.bind(this);
