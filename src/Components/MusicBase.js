@@ -10,7 +10,6 @@ export default class MusicBase extends Component {
             return (
                 <audio
                     src="http://music.163.com/song/media/outer/url?id=1403215687.mp3"
-                    // controls='controls'
                     autoPlay='autoplay'
                     loop='loop'
                     type='audio/mpeg'
@@ -22,7 +21,6 @@ export default class MusicBase extends Component {
             return (
                 <audio
                     src="http://music.163.com/song/media/outer/url?id=541976.mp3"
-                    // controls='controls'
                     autoPlay='autoplay'
                     loop='loop'
                     type='audio/mpeg'
@@ -34,7 +32,6 @@ export default class MusicBase extends Component {
             return (
                 <audio
                     src="http://music.163.com/song/media/outer/url?id=34341360.mp3"
-                    // controls='controls'
                     autoPlay='autoplay'
                     loop='loop'
                     type='audio/mpeg'
@@ -46,7 +43,6 @@ export default class MusicBase extends Component {
             return (
                 <audio
                     src="http://music.163.com/song/media/outer/url?id=473023478.mp3"
-                    // controls='controls'
                     autoPlay='autoplay'
                     loop='loop'
                     type='audio/mpeg'

@@ -26,6 +26,13 @@ export default class Music extends Component {
         this.handleClickStopPlay = this.handleClickStopPlay.bind(this);
         this.handleClickShowMusicList = this.handleClickShowMusicList.bind(this);
     }
+
+    componentDidMount() {
+        this.setState({
+            musicName: '想见你想见你想见你',
+        });
+    }
+
     // 点击播放事件
     handleClickPlay(item) {
         this.setState({
@@ -61,7 +68,7 @@ export default class Music extends Component {
                                         <li
                                             key={index}
                                             onClick={this.handleClickPlay.bind(this, item)}
-                                            style={{fontSize: 15, padding: 5, fontFamily: 'sans-serif', fontWeight: 'bold', color: 'white'}}
+                                            style={{fontSize: 15, padding: 5, fontFamily: 'sans-serif', fontWeight: 'bold', color: 'white', cursor: 'pointer'}}
                                         >
                                             {item}
                                         </li>
