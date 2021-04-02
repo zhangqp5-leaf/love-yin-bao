@@ -61,6 +61,19 @@ export default class Music extends Component {
                     <div className={styles.musicPanal}>
                         <IconFont type="icon-music_icon" style={{fontSize: 60}} onClick={this.handleClickShowMusicList} />
                         <IconFont type="icon-guanbiyinle" style={{fontSize: 60, paddingLeft: 10}} onClick={this.handleClickStopPlay} />
+                        <iframe
+                            frameBorder="no"
+                            border="1"
+                            marginWidth="0"
+                            marginHeight="0"
+                            // width='330'
+                            width='100%'
+                            // height='86'
+                            height='100'
+                            // src='//music.163.com/outchain/player?type=2&id=28557036&auto=1&height=66'
+                            src="//music.163.com/outchain/player?type=2&amp;id=28557036&amp;auto=1&amp;height=80"
+                        >
+                        </iframe>
                         <ul style={{margin: 'auto', marginTop: 16}}>
                             {
                                 this.state.musicList.map((item, index) => {
