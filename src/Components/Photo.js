@@ -22,7 +22,7 @@ class Photo extends Component {
         super(props);
         this.state = {
             showMusicList: true,
-            buttonName: '照片',
+            buttonName: '关闭',
             date: new Date(),
             photoList: [photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo8, photo9, photo10, photo11],
             photo: photo2,
