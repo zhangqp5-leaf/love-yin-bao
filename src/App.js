@@ -3,6 +3,7 @@ import {Button, Input, List} from 'antd';
 import {CSSTransition} from 'react-transition-group';
 import StopWatch from './Components/StopWatch';
 import Music from './Components/Music';
+import Photo from './Components/Photo';
 
 import styles from './App.module.less';
 import './App.css';
@@ -138,8 +139,8 @@ export default class App extends Component {
                 </CSSTransition>
                 <div className={styles.container}>
                     <div className={styles.appTotleStyle}>
-                        {/* <StopWatch /> */}
-                        {/* <Button onClick={this.handleClickChangeBackground}>爱我你就点点我(*^_^*)</Button> */}
+                        <StopWatch />
+                        <Button onClick={this.handleClickChangeBackground}>爱我你就点点我(*^_^*)</Button>
                         <Input
                             placeholder='say something'
                             style={{width: 300, marginLeft: 10, marginRight: 5}}
@@ -147,7 +148,7 @@ export default class App extends Component {
                             onChange={this.handleMessageInputChange}
                             onKeyPress={this.messageBoardKey}
                         />
-                        {/* <Button onClick={this.handleMessageBtnChange}>不爱你也点点我(*^_^*)</Button> */}
+                        <Button onClick={this.handleMessageBtnChange}>不爱你也点点我(*^_^*)</Button>
                         <List
                             style={{width: 400, margin: 'auto', marginTop: 8}}
                             bordered
@@ -156,6 +157,7 @@ export default class App extends Component {
                         />
                     </div>
                     <Music />
+                    <Photo />
                 </div>
             </Fragment>
         );

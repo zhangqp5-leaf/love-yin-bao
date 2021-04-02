@@ -4,9 +4,22 @@
     left: 20px;
     width: 330px;
     z-index: 999;
-    box-shadow: 0 2px 16px 0 rgba(16, 54, 113, .16);
+    // box-shadow: 0 2px 16px 0 rgba(16, 54, 113, .16);
 
     :global {
+        .ant-btn {
+            background-color: transparent;
+            color: white;
+            // height: 30px;
+            // font-size: 16px;
+        }
+        .ant-btn:focus {
+            color: black;
+            border-color: black;
+        }
+        .ant-input {
+            background-color: transparent;
+        }
         .ant-list {
             color: white;
         }
