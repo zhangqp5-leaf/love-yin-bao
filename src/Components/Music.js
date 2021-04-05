@@ -85,7 +85,7 @@ export default class Music extends Component {
                             marginHeight="0"
                             width='330'
                             height='450'
-                            src="http://music.163.com/outchain/player?type=0&id=6691525404&userid=378075663&auto=1&height=430"
+                            src="//music.163.com/outchain/player?type=0&id=6691525404&userid=378075663&auto=1&height=430"
                             // src="https://music.163.com/outchain/playlist?id=6683554465&user=378075663&auto=1&height=650"
                         >
                         </iframe>
