@@ -79,13 +79,14 @@ export default class Music extends Component {
                         <Button style={{left: '9px'}} onClick={this.handleClickShowMusicList}>{buttonName}</Button>
                         {/* <IconFont type="icon-guanbiyinle" style={{fontSize: 60, paddingLeft: 10}} onClick={this.handleClickStopPlay} /> */}
                         <iframe
-                            frameBorder="0"
+                            frameBorder="no"
                             border="0"
                             marginWidth="0"
                             marginHeight="0"
                             width='330'
                             height='450'
-                            src="//music.163.com/outchain/player?type=0&id=6691525404&auto=1&height=430"
+                            src="http://music.163.com/outchain/player?type=0&id=6691525404&userid=378075663&auto=1&height=430"
+                            // src="https://music.163.com/outchain/playlist?id=6683554465&user=378075663&auto=1&height=650"
                         >
                         </iframe>
                         {/* <ul style={{margin: 'auto', marginTop: 16}}>
