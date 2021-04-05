@@ -82,6 +82,8 @@ class Photo extends Component {
 
     render() {
         const {showMusicList, buttonName, photo} = this.state;
+        const {windowHeight} = this.props;
+        const windowHeightChild = windowHeight - 60;
         return (
             showMusicList ? (
                 <Fragment>
@@ -90,7 +92,7 @@ class Photo extends Component {
                             <Button onClick={this.handleClickShowPhoto}>{buttonName}</Button>
                         </div>
                         <div>
-                            <img src={photo} className={styles.photoPosition} />
+                            <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, overflowY: 'auto'}} />
                         </div>
                     </div>
                 </Fragment>

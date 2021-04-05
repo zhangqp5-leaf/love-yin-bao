@@ -54,11 +54,15 @@ export default class App extends Component {
             backgroundList: [Background1, Background2, Background3, Background4, Background5, Background6, Background7, Background8],
             messageBoardInputvalue: '',
             messageBoardList: [],
+            windowHeight: document.body.clientHeight,
         };
         this.handleClickChangeBackground = this.handleClickChangeBackground.bind(this);
         this.handleMessageInputChange = this.handleMessageInputChange.bind(this);
         this.handleMessageBtnChange = this.handleMessageBtnChange.bind(this);
         this.messageBoardKey = this.messageBoardKey.bind(this);
+        // 箭头函数不用绑定this
+        // this.screenChange = this.screenChange.bind(this);
+        // this.resize = this.resize.bind(this);
     }
 
     componentDidMount() {
@@ -66,7 +70,18 @@ export default class App extends Component {
         this.setState({
             messageBoardList: messageBoardData,
         });
+        this.screenChange();
         // writeJson(params); // 执行一下;
+    }
+    // 背景图监听窗体改变事件
+    screenChange = () => {
+        window.addEventListener('resize', this.resize);
+    }
+
+    resize = () => {
+        this.setState({
+            windowHeight: document.body.clientHeight,
+        });
     }
 
     // 切换背景图片事件
@@ -113,11 +128,17 @@ export default class App extends Component {
         }
     }
 
+    componentWillUnMount() {
+        window.removeEventListener('resize', this.resize);
+    }
+
     render() {
+        const {Background, windowHeight} = this.state;
         // 背景图片style
+        // const windowHeight = document.body.clientHeight;
         const sectionStyle = {
             width: '100%',
-            height: '940px',
+            height: windowHeight,
             backgroundImage: `url(${this.state.Background})`,
         };
         // console.log(day1)
@@ -136,6 +157,9 @@ export default class App extends Component {
                     });}}
                 >
                     <div style={sectionStyle}></div>
+                    {/* <div>
+                        <img src={Background} style={{width: '100%', height: windowHeight}} />
+                    </div> */}
                 </CSSTransition>
                 <div className={styles.container}>
                     <div className={styles.appTotleStyle}>
@@ -157,7 +181,7 @@ export default class App extends Component {
                         />
                     </div>
                     <Music />
-                    <Photo />
+                    <Photo windowHeight={windowHeight} />
                 </div>
             </Fragment>
         );
