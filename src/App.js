@@ -173,12 +173,12 @@ export default class App extends Component {
                             onKeyPress={this.messageBoardKey}
                         />
                         <Button onClick={this.handleMessageBtnChange}>不爱你也点点我(*^_^*)</Button>
-                        <List
+                        {/* <List
                             style={{width: 400, margin: 'auto', marginTop: 8}}
                             bordered
                             dataSource={this.state.messageBoardList}
                             renderItem={item => <List.Item>{item}</List.Item>}
-                        />
+                        /> */}
                     </div>
                     <Music />
                     <Photo windowHeight={windowHeight} />
