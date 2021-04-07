@@ -1,8 +1,4 @@
-import React, {Component, Fragment} from 'react';
-import {createFromIconfontCN} from '@ant-design/icons';
-import {List, Button} from 'antd';
-import MusicBase from './MusicBase';
-import MusicAPlayer from './MusicAPlayer';
+import React, {Component} from 'react';
 import ReactAPlayer from 'react-aplayer';
 
 import img1 from '../img/music/musicImg/Snipaste_2021-04-07_11-50-31.png';
@@ -35,37 +31,9 @@ import lrc12 from '../img/music/musicLrc/明天你好 - 牛奶咖啡.lrc';
 import lrc13 from '../img/music/musicLrc/我好想你 - 苏打绿.lrc';
 import lrc14 from '../img/music/musicLrc/老街 - 李荣浩.lrc';
 
-import styles from './Music.module.less';
+// import styles from './Music.module.less';
 
-
-export default class Music extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            musicName: '',
-            buttonName: '点歌',
-            showMusicList: false,
-        };
-        this.handleClickShowMusicList = this.handleClickShowMusicList.bind(this);
-    }
-
-    componentDidMount() {
-        this.setState({
-            musicName: '想见你想见你想见你',
-        });
-    }
-
-
-    // 点击打开或者隐藏列表事件
-    handleClickShowMusicList() {
-        this.setState({
-            showMusicList: !this.state.showMusicList,
-            musicName: '',
-            buttonName: this.state.showMusicList ? '点歌' : '关闭',
-        });
-    }
-
+class MusicAPlayer extends Component {
     onPlay = () => {
         console.log('on play');
     };
@@ -76,11 +44,15 @@ export default class Music extends Component {
 
     onInit = ap => {
         this.ap = ap;
+        console.log('on init');
+        // console.log(ap);
     };
 
+    // componentWillMount() {
+    //     () => this.ap.destroy();
+    // }
+
     render() {
-        // console.log('又');
-        const {buttonName, showMusicList, musicName} = this.state;
         const props = {
             theme: '#b7daff',
             lrcType: 3,
@@ -88,20 +60,20 @@ export default class Music extends Component {
             listMaxHeight: '420px',
             audio: [
                 {
-                    name: '너의 의미 (你的意义)',
-                    artist: 'IU / 金昌万',
-                    url: 'http://music.163.com/song/media/outer/url?id=28557036.mp3',
-                    cover: img2,
-                    lrc: lrc2,
-                    theme: '#ebd0c2',
-                },
-                {
                     name: '想见你想见你想见你',
                     artist: '八三夭乐团',
                     url: 'http://music.163.com/song/media/outer/url?id=1403215687.mp3',
                     cover: img1,
                     lrc: lrc1,
                     theme: '#b7daff',
+                },
+                {
+                    name: '너의 의미 (你的意义)',
+                    artist: 'IU / 金昌万',
+                    url: 'http://music.163.com/song/media/outer/url?id=28557036.mp3',
+                    cover: img2,
+                    lrc: lrc2,
+                    theme: '#ebd0c2',
                 },
                 {
                     name: '樱花樱花想见你',
@@ -203,67 +175,16 @@ export default class Music extends Component {
             ],
         };
         return (
-            showMusicList ? (
-                <Fragment>
-                    <div className={styles.musicPanal}>
-                        <Button
-                            style={{left: '5px'}}
-                            onClick={() => {
-                                this.ap.pause();
-                                this.handleClickShowMusicList();
-                            }}
-                        >
-                            {buttonName}
-                        </Button>
-                        <ReactAPlayer
-                            {...props}
-                            onInit={this.onInit}
-                            onPlay={this.onPlay}
-                            onPause={this.onPause}
-                        />
-                        {/* <MusicAPlayer /> */}
-                        {/* <iframe
-                            frameBorder="no"
-                            border="0"
-                            marginWidth="0"
-                            marginHeight="0"
-                            width='330'
-                            height='450'
-                            src="//music.163.com/outchain/player?type=0&id=6691525404&userid=378075663&auto=1&height=430"
-                            // src="https://music.163.com/outchain/playlist?id=6683554465&user=378075663&auto=1&height=650"
-                        >
-                        </iframe> */}
-                        {/* <ul style={{margin: 'auto', marginTop: 16}}>
-                            {
-                                this.state.musicList.map((item, index) => {
-                                    return (
-                                        <li
-                                            key={index}
-                                            onClick={this.handleClickPlay.bind(this, item)}
-                                            style={{fontSize: 15, padding: 5, fontFamily: 'sans-serif', fontWeight: 'bold', color: 'white', cursor: 'pointer'}}
-                                        >
-                                            {item}
-                                        </li>
-                                    );
-                                })
-                            }
-                        </ul> */}
-                    </div>
-                    <MusicBase
-                        musicName={musicName}
-                    />
-                </Fragment>
-            ) : (
-                <Fragment>
-                    <div className={styles.musicPanal}>
-                        {/* <IconFont type="icon-music_icon" style={{fontSize: 60}} onClick={this.handleClickShowMusicList} /> */}
-                        <Button style={{left: '5px'}} onClick={this.handleClickShowMusicList}>{buttonName}</Button>
-                    </div>
-                    <MusicBase
-                        musicName={musicName}
-                    />
-                </Fragment>
-            )
+            <div>
+                <ReactAPlayer
+                    {...props}
+                    onInit={this.onInit}
+                    onPlay={this.onPlay}
+                    onPause={this.onPause}
+                />
+            </div>
         );
     }
 }
+
+export default MusicAPlayer;
