@@ -141,7 +141,7 @@ class Photo extends Component {
                             <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, overflowY: 'auto'}} />
                         </Popover> */}
                         <Tooltip placement="rightBottom" trigger="click" title={content} overlayClassName={styles.tooltipStyle}>
-                            <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, overflowY: 'auto'}} />
+                            <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, cursor: 'pointer'}} />
                         </Tooltip>
                     </div>
                 </Fragment>
