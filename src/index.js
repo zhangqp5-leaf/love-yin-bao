@@ -7,7 +7,7 @@ import './Index.css';
 
 ReactDOM.render(
     <React.StrictMode>
-        <div >
+        <div>
             <App />
         </div>
     </React.StrictMode>,

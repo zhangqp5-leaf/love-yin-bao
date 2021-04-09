@@ -85,7 +85,7 @@ export default class Music extends Component {
             theme: '#b7daff',
             lrcType: 3,
             listFolded: false,
-            listMaxHeight: '420px',
+            listMaxHeight: '380px',
             audio: [
                 {
                     name: '너의 의미 (你的意义)',
