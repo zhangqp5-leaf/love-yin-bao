@@ -54,6 +54,7 @@ export default class Music extends Component {
         this.setState({
             musicName: '想见你想见你想见你',
         });
+        this.props.onRef(this);
     }
 
 
@@ -77,6 +78,10 @@ export default class Music extends Component {
     onInit = ap => {
         this.ap = ap;
     };
+    // 暂停音乐
+    handleClickPause = () => {
+        this.state.showMusicList ? this.ap.pause() : '';
+    }
 
     render() {
         // console.log('又');
@@ -209,7 +214,7 @@ export default class Music extends Component {
                         <Button
                             style={{left: '5px'}}
                             onClick={() => {
-                                this.ap.pause();
+                                this.handleClickPause();
                                 this.handleClickShowMusicList();
                             }}
                         >

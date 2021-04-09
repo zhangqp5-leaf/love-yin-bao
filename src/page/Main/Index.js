@@ -137,6 +137,14 @@ export default class Main extends Component {
     componentWillUnMount() {
         window.removeEventListener('resize', this.resize);
     }
+    // 调用子组件函数
+    onRef = ref => {
+        this.musicChild = ref;
+    }
+
+    handleClickParentPause = e => {
+        this.musicChild.handleClickPause();
+    }
 
     render() {
         const {Background, windowHeight} = this.state;
@@ -184,12 +192,14 @@ export default class Main extends Component {
                             renderItem={item => <List.Item>{item}</List.Item>}
                         /> */}
                     </div>
-                    <Music />
+                    {/* 调用音乐组件的函数 */}
+                    <Music onRef={this.onRef} />
                     <Photo windowHeight={windowHeight} />
                     <Link to="/love-yin-bao/treehole">
                         <img
                             style={{position: 'absolute', left: 0, bottom: 0, width: windowHeightRabbit, cursor: 'pointer'}}
                             src={Rabbit}
+                            onClick={this.handleClickParentPause}
                         />
                     </Link>
                 </div>
