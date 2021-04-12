@@ -1,0 +1,1 @@
+export const CHANGEWINDOWHEIGHT = 'change-window-height';

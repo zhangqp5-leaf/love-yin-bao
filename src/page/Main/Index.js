@@ -7,6 +7,8 @@ import Photo from './Components/Photo/Photo';
 import {
     Link,
 } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {changeWindowHeight} from '../../Redux/Actions/WindowHeight';
 
 import styles from './Index.module.less';
 import './Index.css';
@@ -24,7 +26,7 @@ import Rabbit from './img/Rabbit.png';
 import messageBoardData from './data/messageBoard.json';
 
 
-export default class Main extends Component {
+class Main extends Component {
 
     state = {
         isShowBackground: false,
@@ -32,7 +34,6 @@ export default class Main extends Component {
         backgroundList: [Background1, Background2, Background3, Background4, Background5, Background6, Background7, Background8],
         messageBoardInputvalue: '',
         messageBoardList: [],
-        windowHeight: document.body.clientHeight,
     };
 
     componentDidMount() {
@@ -48,9 +49,7 @@ export default class Main extends Component {
     }
 
     resize = () => {
-        this.setState({
-            windowHeight: document.body.clientHeight,
-        });
+        this.props.changeWindowHeight(document.body.clientHeight);
     }
 
     // 切换背景图片事件
@@ -108,7 +107,8 @@ export default class Main extends Component {
     }
 
     render() {
-        const {Background, windowHeight} = this.state;
+        const {Background} = this.state;
+        const {windowHeight} = this.props;
         const windowHeightRabbit = windowHeight / 4;
         const sectionStyle = {
             width: '100%',
@@ -149,7 +149,7 @@ export default class Main extends Component {
                     </div>
                     {/* 调用音乐组件的函数 */}
                     <Music onRef={this.onRef} />
-                    <Photo windowHeight={windowHeight} />
+                    <Photo />
                     <Link to="/love-yin-bao/treehole">
                         <img
                             style={{position: 'absolute', left: 0, bottom: 0, width: windowHeightRabbit, cursor: 'pointer'}}
@@ -163,4 +163,11 @@ export default class Main extends Component {
     }
 }
 
-
+export default connect(
+    state => ({
+        windowHeight: state.WindowHeight,
+    }),
+    {
+        changeWindowHeight: changeWindowHeight,
+    }
+)(Main);

@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {Button, Tooltip, Popover, Divider} from 'antd';
+import {connect} from 'react-redux';
 
 import photo1 from '../../img/photo/IMG_0604.JPG';
 import photo2 from '../../img/photo/IMG_0650.JPG';
@@ -140,4 +141,9 @@ class Photo extends Component {
     }
 }
 
-export default Photo;
+export default connect(
+    state => ({
+        windowHeight: state.WindowHeight,
+    }),
+    {}
+)(Photo);
