@@ -1,9 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import {Button, Input, List} from 'antd';
 import {CSSTransition} from 'react-transition-group';
-import StopWatch from './Components/StopWatch';
-import Music from './Components/Music';
-import Photo from './Components/Photo';
+import StopWatch from './Components/StopWatch/StopWatch';
+import Music from './Components/Music/Music';
+import Photo from './Components/Photo/Photo';
 import {
     Link,
 } from 'react-router-dom';
@@ -24,52 +24,16 @@ import Rabbit from './img/Rabbit.png';
 import messageBoardData from './data/messageBoard.json';
 
 
-// const fs = require('fs');
-// var params = {
-//     'id': 5,
-//     'name': '白眉鹰王',
-// };
-// function writeJson(params) {
-//     // 现将json文件读出来
-//     fs.readFile('./data/messageBoard.json', (err, data) => {
-//         if (err) {
-//             return console.error(err);
-//         }
-//         var person = data.toString(); // 将二进制的数据转换为字符串
-//         person = JSON.parse(person); // 将字符串转换为json对象
-//         person.data.push(params); // 将传来的对象push进数组对象中
-//         person.total = person.data.length; // 定义一下总条数，为以后的分页打基础
-//         console.log(person.data);
-//         var str = JSON.stringify(person); // 因为nodejs的写入文件只认识字符串或者二进制数，所以把json对象转换成字符串重新写入json文件中
-//         fs.writeFile('./data/messageBoard.json', str, function (err) {
-//             if (err) {
-//                 console.error(err);
-//             }
-//             console.log('----------新增成功-------------');
-//         });
-//     });
-// }
-
 export default class Main extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isShowBackground: false,
-            Background: Background2,
-            backgroundList: [Background1, Background2, Background3, Background4, Background5, Background6, Background7, Background8],
-            messageBoardInputvalue: '',
-            messageBoardList: [],
-            windowHeight: document.body.clientHeight,
-        };
-        this.handleClickChangeBackground = this.handleClickChangeBackground.bind(this);
-        this.handleMessageInputChange = this.handleMessageInputChange.bind(this);
-        this.handleMessageBtnChange = this.handleMessageBtnChange.bind(this);
-        this.messageBoardKey = this.messageBoardKey.bind(this);
-        // 箭头函数不用绑定this
-        // this.screenChange = this.screenChange.bind(this);
-        // this.resize = this.resize.bind(this);
-    }
+    state = {
+        isShowBackground: false,
+        Background: Background2,
+        backgroundList: [Background1, Background2, Background3, Background4, Background5, Background6, Background7, Background8],
+        messageBoardInputvalue: '',
+        messageBoardList: [],
+        windowHeight: document.body.clientHeight,
+    };
 
     componentDidMount() {
         // 读取json文件数据
@@ -77,7 +41,6 @@ export default class Main extends Component {
             messageBoardList: messageBoardData,
         });
         this.screenChange();
-        // writeJson(params); // 执行一下;
     }
     // 背景图监听窗体改变事件
     screenChange = () => {
@@ -91,29 +54,27 @@ export default class Main extends Component {
     }
 
     // 切换背景图片事件
-    handleClickChangeBackground() {
-        for (var i = 0; i < this.state.backgroundList.length; i++) {
-            if (this.state.backgroundList[i] === this.state.Background) {
-                this.setState({
-                    backgroundList: this.state.backgroundList.splice(i, 1),
-                });
+    handleClickChangeBackground = () => {
+        const {backgroundList, Background} = this.state;
+        let backgroundListCopy = JSON.parse(JSON.stringify(backgroundList));
+        for (var i = 0; i < backgroundListCopy.length; i++) {
+            if (backgroundListCopy[i] === Background) {
+                backgroundListCopy.splice(i, 1);
             }
         };
-        let BackgroundCopy = this.state.Background;
         this.setState({
-            Background: this.state.backgroundList[Math.floor(Math.random() * this.state.backgroundList.length)],
-            backgroundList: [...this.state.backgroundList, BackgroundCopy],
+            Background: backgroundListCopy[Math.floor(Math.random() * backgroundListCopy.length)],
             isShowBackground: !this.state.isShowBackground,
         });
     }
     // 输入框数据传到代码字符串
-    handleMessageInputChange(e) {
+    handleMessageInputChange = e => {
         this.setState({
             messageBoardInputvalue: e.target.value,
         });
     }
     // 添加输入框数据到表单
-    handleMessageBtnChange() {
+    handleMessageBtnChange = () => {
         // 判定输入的字符串是否全是空格
         if (this.state.messageBoardInputvalue.split(' ').join('').length !== 0) {
             this.setState({
@@ -149,17 +110,11 @@ export default class Main extends Component {
     render() {
         const {Background, windowHeight} = this.state;
         const windowHeightRabbit = windowHeight / 4;
-        // 背景图片style
-        // const windowHeight = document.body.clientHeight;
         const sectionStyle = {
             width: '100%',
             height: windowHeight,
             backgroundImage: `url(${Background})`,
         };
-        // console.log(day1)
-        // console.log(this.state.backgroundList);
-        // console.log(this.state.Background);
-        // console.log(this.state.isShowBackground);
         return (
             <Fragment>
                 {/* 背景图片切换样式 */}

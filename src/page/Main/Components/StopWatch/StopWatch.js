@@ -3,12 +3,9 @@ import React, {Component} from 'react';
 import styles from './StopWatch.module.less';
 
 export default class StopWatch extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: new Date(),
-        };
-    }
+    state = {
+        date: new Date(),
+    };
 
     componentDidMount() {
         this.timerID = setInterval(

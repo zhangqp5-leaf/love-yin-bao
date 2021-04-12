@@ -5,49 +5,45 @@ import MusicBase from './MusicBase';
 import MusicAPlayer from './MusicAPlayer';
 import ReactAPlayer from 'react-aplayer';
 
-import img1 from '../img/music/musicImg/Snipaste_2021-04-07_11-50-31.png';
-import img2 from '../img/music/musicImg/Snipaste_2021-04-07_12-16-46.png';
-import img3 from '../img/music/musicImg/Snipaste_2021-04-07_12-21-11.png';
-import img4 from '../img/music/musicImg/Snipaste_2021-04-07_12-23-29.png';
-import img5 from '../img/music/musicImg/Snipaste_2021-04-07_12-25-26.png';
-import img6 from '../img/music/musicImg/Snipaste_2021-04-07_12-28-12.png';
-import img7 from '../img/music/musicImg/Snipaste_2021-04-07_12-30-13.png';
-import img8 from '../img/music/musicImg/Snipaste_2021-04-07_12-32-19.png';
-import img9 from '../img/music/musicImg/Snipaste_2021-04-07_12-33-56.png';
-import img10 from '../img/music/musicImg/Snipaste_2021-04-07_12-35-39.png';
-import img11 from '../img/music/musicImg/Snipaste_2021-04-07_12-46-48.png';
-import img12 from '../img/music/musicImg/Snipaste_2021-04-07_12-48-35.png';
-import img13 from '../img/music/musicImg/Snipaste_2021-04-07_12-50-13.png';
-import img14 from '../img/music/musicImg/Snipaste_2021-04-07_12-51-43.png';
+import img1 from '../../img/music/musicImg/Snipaste_2021-04-07_11-50-31.png';
+import img2 from '../../img/music/musicImg/Snipaste_2021-04-07_12-16-46.png';
+import img3 from '../../img/music/musicImg/Snipaste_2021-04-07_12-21-11.png';
+import img4 from '../../img/music/musicImg/Snipaste_2021-04-07_12-23-29.png';
+import img5 from '../../img/music/musicImg/Snipaste_2021-04-07_12-25-26.png';
+import img6 from '../../img/music/musicImg/Snipaste_2021-04-07_12-28-12.png';
+import img7 from '../../img/music/musicImg/Snipaste_2021-04-07_12-30-13.png';
+import img8 from '../../img/music/musicImg/Snipaste_2021-04-07_12-32-19.png';
+import img9 from '../../img/music/musicImg/Snipaste_2021-04-07_12-33-56.png';
+import img10 from '../../img/music/musicImg/Snipaste_2021-04-07_12-35-39.png';
+import img11 from '../../img/music/musicImg/Snipaste_2021-04-07_12-46-48.png';
+import img12 from '../../img/music/musicImg/Snipaste_2021-04-07_12-48-35.png';
+import img13 from '../../img/music/musicImg/Snipaste_2021-04-07_12-50-13.png';
+import img14 from '../../img/music/musicImg/Snipaste_2021-04-07_12-51-43.png';
 
-import lrc1 from '../img/music/musicLrc/想见你想见你想见你 - 八三夭.lrc';
-import lrc2 from '../img/music/musicLrc/너의 의미 - IU,金昌万.lrc';
-import lrc3 from '../img/music/musicLrc/樱花樱花想见你 - 李蚊香,满汉全席.lrc';
-import lrc4 from '../img/music/musicLrc/木桥小谣 - 音阙诗听,王梓钰.lrc';
-import lrc5 from '../img/music/musicLrc/可不可以 - 张紫豪.lrc';
-import lrc6 from '../img/music/musicLrc/而我知道 - 五月天.lrc';
-import lrc7 from '../img/music/musicLrc/爱的人 - 沙宝亮.lrc';
-import lrc8 from '../img/music/musicLrc/离人愁 - 曲肖冰.lrc';
-import lrc9 from '../img/music/musicLrc/丁香花 - 唐磊.lrc';
-import lrc10 from '../img/music/musicLrc/我一定会爱上你 - 谢春花.lrc';
-import lrc11 from '../img/music/musicLrc/小永远 - 何洁.lrc';
-import lrc12 from '../img/music/musicLrc/明天你好 - 牛奶咖啡.lrc';
-import lrc13 from '../img/music/musicLrc/我好想你 - 苏打绿.lrc';
-import lrc14 from '../img/music/musicLrc/老街 - 李荣浩.lrc';
+import lrc1 from '../../img/music/musicLrc/想见你想见你想见你 - 八三夭.lrc';
+import lrc2 from '../../img/music/musicLrc/너의 의미 - IU,金昌万.lrc';
+import lrc3 from '../../img/music/musicLrc/樱花樱花想见你 - 李蚊香,满汉全席.lrc';
+import lrc4 from '../../img/music/musicLrc/木桥小谣 - 音阙诗听,王梓钰.lrc';
+import lrc5 from '../../img/music/musicLrc/可不可以 - 张紫豪.lrc';
+import lrc6 from '../../img/music/musicLrc/而我知道 - 五月天.lrc';
+import lrc7 from '../../img/music/musicLrc/爱的人 - 沙宝亮.lrc';
+import lrc8 from '../../img/music/musicLrc/离人愁 - 曲肖冰.lrc';
+import lrc9 from '../../img/music/musicLrc/丁香花 - 唐磊.lrc';
+import lrc10 from '../../img/music/musicLrc/我一定会爱上你 - 谢春花.lrc';
+import lrc11 from '../../img/music/musicLrc/小永远 - 何洁.lrc';
+import lrc12 from '../../img/music/musicLrc/明天你好 - 牛奶咖啡.lrc';
+import lrc13 from '../../img/music/musicLrc/我好想你 - 苏打绿.lrc';
+import lrc14 from '../../img/music/musicLrc/老街 - 李荣浩.lrc';
 
 import styles from './Music.module.less';
 
 
 export default class Music extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            musicName: '',
-            buttonName: '点歌',
-            showMusicList: false,
-        };
-        this.handleClickShowMusicList = this.handleClickShowMusicList.bind(this);
+    state = {
+        musicName: '',
+        buttonName: '点歌',
+        showMusicList: false,
     }
 
     componentDidMount() {
@@ -59,7 +55,7 @@ export default class Music extends Component {
 
 
     // 点击打开或者隐藏列表事件
-    handleClickShowMusicList() {
+    handleClickShowMusicList = () => {
         this.setState({
             showMusicList: !this.state.showMusicList,
             musicName: '',
@@ -238,30 +234,11 @@ export default class Music extends Component {
                             // src="https://music.163.com/outchain/playlist?id=6683554465&user=378075663&auto=1&height=650"
                         >
                         </iframe> */}
-                        {/* <ul style={{margin: 'auto', marginTop: 16}}>
-                            {
-                                this.state.musicList.map((item, index) => {
-                                    return (
-                                        <li
-                                            key={index}
-                                            onClick={this.handleClickPlay.bind(this, item)}
-                                            style={{fontSize: 15, padding: 5, fontFamily: 'sans-serif', fontWeight: 'bold', color: 'white', cursor: 'pointer'}}
-                                        >
-                                            {item}
-                                        </li>
-                                    );
-                                })
-                            }
-                        </ul> */}
                     </div>
-                    <MusicBase
-                        musicName={musicName}
-                    />
                 </Fragment>
             ) : (
                 <Fragment>
                     <div className={styles.musicPanal}>
-                        {/* <IconFont type="icon-music_icon" style={{fontSize: 60}} onClick={this.handleClickShowMusicList} /> */}
                         <Button style={{left: '5px'}} onClick={this.handleClickShowMusicList}>{buttonName}</Button>
                     </div>
                     <MusicBase
