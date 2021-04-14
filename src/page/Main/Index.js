@@ -109,7 +109,7 @@ class Main extends Component {
 
     render() {
         const {Background} = this.state;
-        const {windowHeight} = this.props;
+        const {windowHeight, showPhoto} = this.props;
         const windowHeightRabbit = windowHeight / 4;
         const sectionStyle = {
             width: '100%',
@@ -151,7 +151,9 @@ class Main extends Component {
                     {/* 调用音乐组件的函数 */}
                     <Music onRef={this.onRef} />
                     <Photo />
-                    <Dialog />
+                    {
+                        showPhoto ? <Dialog /> : ''
+                    }
                     <Link to="/love-yin-bao/treehole">
                         <img
                             style={{position: 'absolute', left: 0, bottom: 0, width: windowHeightRabbit, cursor: 'pointer'}}
@@ -168,6 +170,7 @@ class Main extends Component {
 export default connect(
     state => ({
         windowHeight: state.WindowHeight,
+        showPhoto: state.ShowPhoto,
     }),
     {
         changeWindowHeight: changeWindowHeight,

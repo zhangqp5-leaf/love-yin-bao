@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {Button, Tooltip, Popover, Divider} from 'antd';
 import {connect} from 'react-redux';
 import {changePhotoDes} from '../../../../Redux/Actions/PhotoDes';
+import {changeShowPhoto} from '../../../../Redux/Actions/ShowPhoto';
 
 import photo1 from '../../img/photo/IMG_0604.JPG';
 import photo2 from '../../img/photo/IMG_0650.JPG';
@@ -18,10 +19,11 @@ import photo11 from '../../img/photo/IMG_0665.JPG';
 
 import styles from './Photo.module.less';
 
+// let showPhoto = true;
+
 class Photo extends Component {
 
     state = {
-        showMusicList: true,
         buttonName: '关闭',
         date: new Date(),
         photoListJson: [
@@ -41,8 +43,6 @@ class Photo extends Component {
         photoDesList: [],
         photoDateList: [],
         photo: photo3,
-        // photoDes: '在南京待的最后一天，去游乐场玩，开你喜欢的卡丁车',
-        // photoDate: '2021-03-22 12:19',
     };
 
     componentDidMount() {
@@ -72,10 +72,6 @@ class Photo extends Component {
         });
         for (var i = 0; i < photoList.length; i++) {
             if (photoList[i] === photoAfter) {
-                // this.setState({
-                //     photoDes: this.state.photoDesList[i],
-                //     photoDate: this.state.photoDateList[i],
-                // });
                 const photoDesData = {photoDes: this.state.photoDesList[i], photoDate: this.state.photoDateList[i]};
                 this.props.changePhotoDes(photoDesData);
             }
@@ -85,9 +81,9 @@ class Photo extends Component {
 
 
     handleClickShowPhoto = () => {
+        this.props.changeShowPhoto();
         this.setState({
-            showMusicList: !this.state.showMusicList,
-            buttonName: this.state.showMusicList ? '照片' : '关闭',
+            buttonName: this.props.showPhoto ? '照片' : '关闭',
         });
     }
     // 页面加载前转换数据格式
@@ -109,8 +105,8 @@ class Photo extends Component {
 
     render() {
         // console.log(this.state.photoDesList);
-        const {showMusicList, buttonName, photo, photoDate} = this.state;
-        const {windowHeight, photoDes} = this.props;
+        const {buttonName, photo} = this.state;
+        const {windowHeight, showPhoto} = this.props;
         const windowHeightChild = windowHeight - 60;
         // const content = (
         //     <div>
@@ -120,31 +116,22 @@ class Photo extends Component {
         //     </div>
         // );
         return (
-            showMusicList ? (
-                <Fragment>
-                    <div className={styles.photoPanal}>
-                        <div className={styles.buttonPosition}>
-                            <Button onClick={this.handleClickShowPhoto}>{buttonName}</Button>
-                            {/* <Button onClick={this.tickTest}>test</Button> */}
-                        </div>
-                        {/* <Popover placement="rightBottom" trigger="click" title={photoDate} content={photoDes} overlayClassName={styles.tooltipStyle}>
-                            <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, overflowY: 'auto'}} />
-                        </Popover> */}
-                        {/* <Tooltip placement="rightBottom" trigger="click" title={content} overlayClassName={styles.tooltipStyle} defaultVisible='true'>
-                            <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, cursor: 'pointer'}} />
-                        </Tooltip> */}
-                        <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild}} />
+            <Fragment>
+                <div className={styles.photoPanal}>
+                    <div className={styles.buttonPosition}>
+                        <Button onClick={this.handleClickShowPhoto}>{buttonName}</Button>
                     </div>
-                </Fragment>
-            ) : (
-                <Fragment>
-                    <div className={styles.photoPanal}>
-                        <div className={styles.buttonPosition}>
-                            <Button onClick={this.handleClickShowPhoto}>{buttonName}</Button>
-                        </div>
-                    </div>
-                </Fragment>
-            )
+                    {/* <Popover placement="rightBottom" trigger="click" title={photoDate} content={photoDes} overlayClassName={styles.tooltipStyle}>
+                        <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, overflowY: 'auto'}} />
+                    </Popover> */}
+                    {/* <Tooltip placement="rightBottom" trigger="click" title={content} overlayClassName={styles.tooltipStyle} defaultVisible='true'>
+                        <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, cursor: 'pointer'}} />
+                    </Tooltip> */}
+                    {
+                        showPhoto ? <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild}} /> : ''
+                    }
+                </div>
+            </Fragment>
         );
     }
 }
@@ -153,8 +140,10 @@ export default connect(
     state => ({
         windowHeight: state.WindowHeight,
         photoDes: state.PhotoDes,
+        showPhoto: state.ShowPhoto,
     }),
     {
         changePhotoDes: changePhotoDes,
+        changeShowPhoto: changeShowPhoto,
     }
 )(Photo);
