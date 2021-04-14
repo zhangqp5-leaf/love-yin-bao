@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {Button, Tooltip, Popover, Divider} from 'antd';
 import {connect} from 'react-redux';
+import {changePhotoDes} from '../../../../Redux/Actions/PhotoDes';
 
 import photo1 from '../../img/photo/IMG_0604.JPG';
 import photo2 from '../../img/photo/IMG_0650.JPG';
@@ -40,8 +41,8 @@ class Photo extends Component {
         photoDesList: [],
         photoDateList: [],
         photo: photo3,
-        photoDes: '在南京待的最后一天，去游乐场玩，开你喜欢的卡丁车',
-        photoDate: '2021-03-22 12:19',
+        // photoDes: '在南京待的最后一天，去游乐场玩，开你喜欢的卡丁车',
+        // photoDate: '2021-03-22 12:19',
     };
 
     componentDidMount() {
@@ -64,19 +65,24 @@ class Photo extends Component {
                 photoListBefore.splice(i, 1);
             }
         };
+        let photoAfter = JSON.parse(JSON.stringify(photoListBefore[Math.floor(Math.random() * photoListBefore.length)]));
         this.setState({
             date: new Date(),
-            photo: photoListBefore[Math.floor(Math.random() * photoListBefore.length)],
+            photo: photoAfter,
         });
         for (var i = 0; i < photoList.length; i++) {
-            if (photoList[i] === photo) {
-                this.setState({
-                    photoDes: this.state.photoDesList[i],
-                    photoDate: this.state.photoDateList[i],
-                });
+            if (photoList[i] === photoAfter) {
+                // this.setState({
+                //     photoDes: this.state.photoDesList[i],
+                //     photoDate: this.state.photoDateList[i],
+                // });
+                const photoDesData = {photoDes: this.state.photoDesList[i], photoDate: this.state.photoDateList[i]};
+                this.props.changePhotoDes(photoDesData);
             }
         };
     }
+
+
 
     handleClickShowPhoto = () => {
         this.setState({
@@ -103,29 +109,31 @@ class Photo extends Component {
 
     render() {
         // console.log(this.state.photoDesList);
-        const {showMusicList, buttonName, photo, photoDes, photoDate} = this.state;
-        const {windowHeight} = this.props;
+        const {showMusicList, buttonName, photo, photoDate} = this.state;
+        const {windowHeight, photoDes} = this.props;
         const windowHeightChild = windowHeight - 60;
-        const content = (
-            <div>
-                <div>{photoDate}</div>
-                <Divider style={{border: '0.01px solid rgba(240, 240, 240, 100)', left: '24px', right: '24px', margin: '0px'}} />
-                <div>{photoDes}</div>
-            </div>
-        );
+        // const content = (
+        //     <div>
+        //         <div>{photoDes.photoDate}</div>
+        //         <Divider style={{border: '0.01px solid rgba(240, 240, 240, 100)', left: '24px', right: '24px', margin: '0px'}} />
+        //         <div>{photoDes.photoDes}</div>
+        //     </div>
+        // );
         return (
             showMusicList ? (
                 <Fragment>
                     <div className={styles.photoPanal}>
                         <div className={styles.buttonPosition}>
                             <Button onClick={this.handleClickShowPhoto}>{buttonName}</Button>
+                            {/* <Button onClick={this.tickTest}>test</Button> */}
                         </div>
                         {/* <Popover placement="rightBottom" trigger="click" title={photoDate} content={photoDes} overlayClassName={styles.tooltipStyle}>
                             <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, overflowY: 'auto'}} />
                         </Popover> */}
-                        <Tooltip placement="rightBottom" trigger="click" title={content} overlayClassName={styles.tooltipStyle}>
+                        {/* <Tooltip placement="rightBottom" trigger="click" title={content} overlayClassName={styles.tooltipStyle} defaultVisible='true'>
                             <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, cursor: 'pointer'}} />
-                        </Tooltip>
+                        </Tooltip> */}
+                        <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild}} />
                     </div>
                 </Fragment>
             ) : (
@@ -144,6 +152,9 @@ class Photo extends Component {
 export default connect(
     state => ({
         windowHeight: state.WindowHeight,
+        photoDes: state.PhotoDes,
     }),
-    {}
+    {
+        changePhotoDes: changePhotoDes,
+    }
 )(Photo);

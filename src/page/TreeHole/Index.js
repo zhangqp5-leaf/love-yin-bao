@@ -2,31 +2,14 @@ import React, {Component, Fragment} from 'react';
 import {
     Link,
 } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import Bear from './img/bear.png';
 
 class TreeHole extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            windowHeight: document.body.clientHeight,
-        };
-    }
-
-    // 背景图监听窗体改变事件
-    screenChange = () => {
-        window.addEventListener('resize', this.resize);
-    }
-
-    resize = () => {
-        this.setState({
-            windowHeight: document.body.clientHeight,
-        });
-    }
-
     render() {
-        const {windowHeight} = this.state;
+        const {windowHeight} = this.props;
         const windowHeightBear = windowHeight / 4;
         return (
             <Fragment>
@@ -44,4 +27,9 @@ class TreeHole extends Component {
     }
 }
 
-export default TreeHole;
+export default connect(
+    state => ({
+        windowHeight: state.WindowHeight,
+    }),
+    {}
+)(TreeHole);
