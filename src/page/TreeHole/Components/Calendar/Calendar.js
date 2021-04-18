@@ -1,5 +1,6 @@
 import React, {Component, useState, Fragment} from 'react';
-import {Calendar, Badge, Modal, message, Input, Button} from 'antd';
+import {Calendar, Badge, Modal, message, Input, Button, Tooltip, List, Radio} from 'antd';
+import {QuestionCircleFilled, QuestionCircleOutlined} from '@ant-design/icons';
 import {connect} from 'react-redux';
 
 import styles from './Calendar.module.less';
@@ -489,10 +490,12 @@ class CalendarInfo extends Component {
     state = {
         isModalVisible: false,
         contentInputValue: '',
-        contentInputValueList: '',
-        nowYear: 0,
-        nowMonth: 0,
-        nowDay: 0,
+        contentInputValueList: [],
+        nowYear: 2021,
+        nowMonth: 1,
+        nowDay: 1,
+        // modal内使用
+        isShowAdd: true,
     }
 
     handleOk = () => {
@@ -500,16 +503,20 @@ class CalendarInfo extends Component {
         this.setState({
             isModalVisible: false,
         });
-        if (contentInputValueList.split(' ').join('').length !== 0) {
-            totleValue[nowYear][nowMonth][nowDay] = JSON.parse(JSON.stringify(
-                [{type: 'success', content: contentInputValueList}, ...totleValue[nowYear][nowMonth][nowDay]]
-            ));
-        }
-        // totleValue[nowYear][nowMonth + 1][nowDay] = JSON.parse(JSON.stringify(
-        //     [{type: 'success', content: contentInputValueList}, ...totleValue[nowYear][nowMonth + 1][nowDay]]
-        // ));
+        // if (contentInputValueList.split(' ').join('').length !== 0) {
+        //     totleValue[nowYear][nowMonth][nowDay] = JSON.parse(JSON.stringify(
+        //         [{type: 'success', content: contentInputValueList}, ...totleValue[nowYear][nowMonth][nowDay]]
+        //     ));
+        // }
+        contentInputValueList.map(item => {
+            if (item.split(' ').join('').length !== 0) {
+                totleValue[nowYear][nowMonth][nowDay] = JSON.parse(JSON.stringify(
+                    [{type: 'success', content: item}, ...totleValue[nowYear][nowMonth][nowDay]]
+                ));
+            }
+        });
         this.setState({
-            contentInputValueList: '',
+            contentInputValueList: [],
         });
     }
 
@@ -544,7 +551,7 @@ class CalendarInfo extends Component {
         // 判定输入的字符串是否全是空格
         if (contentInputValue.split(' ').join('').length !== 0) {
             this.setState({
-                contentInputValueList: JSON.parse(JSON.stringify(contentInputValue)),
+                contentInputValueList: [JSON.parse(JSON.stringify(contentInputValue)), ...contentInputValueList],
                 contentInputValue: '',
             });
             message.info('添加成功');
@@ -563,11 +570,31 @@ class CalendarInfo extends Component {
         }
     }
 
+    // modal内事件函数
+    clickShowAdd = () => {
+        this.setState({
+            isShowAdd: !this.state.isShowAdd,
+        });
+    }
+
     render() {
-        const {isModalVisible, contentInputValue} = this.state;
+        const {isModalVisible, contentInputValue, nowYear, nowMonth, nowDay, contentInputValueList, isShowAdd} = this.state;
+        const modalTitle = (
+            <span>
+                {nowYear + '-' + nowMonth + '-' + nowDay}&nbsp;
+                <Tooltip title="输入文字后需要点击OK才能添加成功喔！！！(列表为暂存区，可一次添加多条后再点击OK，Cancel可取消添加 (*^_^*))">
+                    <QuestionCircleOutlined style={{cursor: 'pointer'}} />
+                </Tooltip>
+            </span>
+        );
+        // modal内查看今日事件处数据
+        let modalList = [];
+        if (totleValue[nowYear][nowMonth][nowDay].length > 0) {
+            for (var i = 0; i < totleValue[nowYear][nowMonth][nowDay].length; i++) {
+                modalList = [...modalList, JSON.parse(JSON.stringify(totleValue[nowYear][nowMonth][nowDay][i].content))];
+            }
+        }
         const {windowHeight} = this.props;
-        const windowHeightCalendar = (3 * windowHeight) / 4;
-        // console.log(totleValue[2021][])
         return (
             <Fragment>
                 <Calendar
@@ -576,14 +603,40 @@ class CalendarInfo extends Component {
                     onSelect={this.onSelect}
                     style={{position: 'absolute', bottom: windowHeight / 4, top: 0, overflowY: 'auto'}}
                 />
-                <Modal title="Basic Modal" visible={isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
+                <Modal title={modalTitle} visible={isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
                     <div>
-                        <Input
-                            placeholder='输入今天的话，回车提交'
-                            value={contentInputValue}
-                            onChange={this.handleContentInputChange}
-                            onKeyPress={this.contentBoardKey}
-                        />
+                        <Radio.Group defaultValue={this.state.isShowAdd ? 'add' : 'view'} buttonStyle="solid" onChange={this.clickShowAdd}>
+                            <Radio.Button value='add'>添加今日事件</Radio.Button>
+                            <Radio.Button value='view'>查看今日事件</Radio.Button>
+                        </Radio.Group>
+                        {
+                            isShowAdd ? (
+                                <div>
+                                    <Input
+                                        style={{margin: 'auto', marginTop: 8}}
+                                        placeholder='输入今天的话，回车提交'
+                                        value={contentInputValue}
+                                        onChange={this.handleContentInputChange}
+                                        onKeyPress={this.contentBoardKey}
+                                    />
+                                    <List
+                                        style={{margin: 'auto', marginTop: 8}}
+                                        bordered
+                                        dataSource={contentInputValueList}
+                                        renderItem={item => <List.Item>{item}</List.Item>}
+                                    />
+                                </div>
+                            ) : (
+                                <div>
+                                    <List
+                                        style={{margin: 'auto', marginTop: 8}}
+                                        bordered
+                                        dataSource={modalList}
+                                        renderItem={item => <List.Item>{item}</List.Item>}
+                                    />
+                                </div>
+                            )
+                        }
                         {/* <Button onClick={this.handleContentBtnChange} style={{display: 'inline-block'}}>提交</Button> */}
                     </div>
                 </Modal>
