@@ -503,11 +503,6 @@ class CalendarInfo extends Component {
         this.setState({
             isModalVisible: false,
         });
-        // if (contentInputValueList.split(' ').join('').length !== 0) {
-        //     totleValue[nowYear][nowMonth][nowDay] = JSON.parse(JSON.stringify(
-        //         [{type: 'success', content: contentInputValueList}, ...totleValue[nowYear][nowMonth][nowDay]]
-        //     ));
-        // }
         contentInputValueList.map(item => {
             if (item.split(' ').join('').length !== 0) {
                 totleValue[nowYear][nowMonth][nowDay] = JSON.parse(JSON.stringify(
@@ -603,7 +598,7 @@ class CalendarInfo extends Component {
                     onSelect={this.onSelect}
                     style={{position: 'absolute', bottom: windowHeight / 4, top: 0, overflowY: 'auto'}}
                 />
-                <Modal title={modalTitle} visible={isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
+                <Modal title={modalTitle} visible={isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel} maskClosable={false}>
                     <div>
                         <Radio.Group defaultValue={this.state.isShowAdd ? 'add' : 'view'} buttonStyle="solid" onChange={this.clickShowAdd}>
                             <Radio.Button value='add'>添加今日事件</Radio.Button>
