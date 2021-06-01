@@ -4,6 +4,10 @@ import {List, Button} from 'antd';
 import MusicBase from './MusicBase';
 import MusicAPlayer from './MusicAPlayer';
 import ReactAPlayer from 'react-aplayer';
+import {
+    connect,
+} from 'react-redux';
+import {changeShowPhoto} from '../../../../Redux/Actions/ShowPhoto';
 
 import img1 from '../../img/music/musicImg/Snipaste_2021-04-07_11-50-31.png';
 import img2 from '../../img/music/musicImg/Snipaste_2021-04-07_12-16-46.png';
@@ -38,12 +42,13 @@ import lrc14 from '../../img/music/musicLrc/老街 - 李荣浩.lrc';
 import styles from './Music.module.less';
 
 
-export default class Music extends Component {
+class Music extends Component {
 
     state = {
         musicName: '',
-        buttonName: '点歌',
+        musicButtonName: '点歌',
         showMusicList: false,
+        PhotoButtonName: '相册',
     }
 
     componentDidMount() {
@@ -59,7 +64,7 @@ export default class Music extends Component {
         this.setState({
             showMusicList: !this.state.showMusicList,
             musicName: '',
-            buttonName: this.state.showMusicList ? '点歌' : '关闭',
+            musicButtonName: this.state.showMusicList ? '点歌' : '关闭',
         });
     }
 
@@ -79,9 +84,18 @@ export default class Music extends Component {
         this.state.showMusicList ? this.ap.pause() : '';
     }
 
+    // 照片Button函数
+    handleClickShowPhoto = () => {
+        this.props.changeShowPhoto();
+        this.setState({
+            PhotoButtonName: this.props.showPhoto ? '相册' : '关闭相册',
+        });
+    }
+
     render() {
         // console.log('又');
-        const {buttonName, showMusicList, musicName} = this.state;
+        const {musicButtonName, showMusicList, musicName, PhotoButtonName} = this.state;
+        const {showPhoto} = this.props;
         const props = {
             theme: '#b7daff',
             lrcType: 3,
@@ -206,40 +220,44 @@ export default class Music extends Component {
         return (
             showMusicList ? (
                 <Fragment>
-                    <div className={styles.musicPanal}>
-                        <Button
-                            style={{left: '5px'}}
-                            onClick={() => {
-                                this.handleClickPause();
-                                this.handleClickShowMusicList();
-                            }}
-                        >
-                            {buttonName}
-                        </Button>
-                        <ReactAPlayer
-                            {...props}
-                            onInit={this.onInit}
-                            onPlay={this.onPlay}
-                            onPause={this.onPause}
-                        />
+                    <div className={styles.totalPanal}>
+                        <div>
+                            <Button
+                                onClick={() => {
+                                    this.handleClickPause();
+                                    this.handleClickShowMusicList();
+                                }}
+                            >
+                                {musicButtonName}
+                            </Button>
+                        </div>
+                        <div>
+                            <Button onClick={this.handleClickShowPhoto}>
+                                回忆时光
+                            </Button>
+                        </div>
+                        <div className={styles.musicPanal}>
+                            <ReactAPlayer
+                                {...props}
+                                onInit={this.onInit}
+                                onPlay={this.onPlay}
+                                onPause={this.onPause}
+                            />
+                        </div>
                         {/* <MusicAPlayer /> */}
-                        {/* <iframe
-                            frameBorder="no"
-                            border="0"
-                            marginWidth="0"
-                            marginHeight="0"
-                            width='330'
-                            height='450'
-                            src="//music.163.com/outchain/player?type=0&id=6691525404&userid=378075663&auto=1&height=430"
-                            // src="https://music.163.com/outchain/playlist?id=6683554465&user=378075663&auto=1&height=650"
-                        >
-                        </iframe> */}
                     </div>
                 </Fragment>
             ) : (
                 <Fragment>
-                    <div className={styles.musicPanal}>
-                        <Button style={{left: '5px'}} onClick={this.handleClickShowMusicList}>{buttonName}</Button>
+                    <div className={styles.totalPanal}>
+                        <div>
+                            <Button onClick={this.handleClickShowMusicList}>{musicButtonName}</Button>
+                        </div>
+                        <div>
+                            <Button onClick={this.handleClickShowPhoto}>
+                                回忆时光
+                            </Button>
+                        </div>
                     </div>
                     <MusicBase
                         musicName={musicName}
@@ -249,3 +267,13 @@ export default class Music extends Component {
         );
     }
 }
+
+
+export default connect(
+    state => ({
+        showPhoto: state.ShowPhoto,
+    }),
+    {
+        changeShowPhoto: changeShowPhoto,
+    }
+)(Music);

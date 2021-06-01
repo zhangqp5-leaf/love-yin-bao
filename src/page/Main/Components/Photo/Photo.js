@@ -2,7 +2,6 @@ import React, {Component, Fragment} from 'react';
 import {Button, Tooltip, Popover, Divider} from 'antd';
 import {connect} from 'react-redux';
 import {changePhotoDes} from '../../../../Redux/Actions/PhotoDes';
-import {changeShowPhoto} from '../../../../Redux/Actions/ShowPhoto';
 
 import photo1 from '../../img/photo/IMG_0604.JPG';
 import photo2 from '../../img/photo/IMG_0650.JPG';
@@ -26,12 +25,9 @@ import photo19 from '../../img/photo/长沙岳麓书院.jpg';
 
 import styles from './Photo.module.less';
 
-// let showPhoto = true;
-
 class Photo extends Component {
 
     state = {
-        buttonName: '关闭',
         date: new Date(),
         photoListJson: [
             {photoName: photo1, photoDesList: '宝贝在春游！', photoDate: '2021-03-14'},
@@ -95,12 +91,6 @@ class Photo extends Component {
 
 
 
-    handleClickShowPhoto = () => {
-        this.props.changeShowPhoto();
-        this.setState({
-            buttonName: this.props.showPhoto ? '照片' : '关闭',
-        });
-    }
     // 页面加载前转换数据格式
     preChangePhotoList = () => {
         let photoListBak = JSON.parse(JSON.stringify(this.state.photoList));
@@ -120,9 +110,8 @@ class Photo extends Component {
 
     render() {
         // console.log(this.state.photoDesList);
-        const {buttonName, photo} = this.state;
+        const {photo} = this.state;
         const {windowHeight, showPhoto} = this.props;
-        const windowHeightChild = windowHeight - 60;
         // const content = (
         //     <div>
         //         <div>{photoDes.photoDate}</div>
@@ -132,10 +121,7 @@ class Photo extends Component {
         // );
         return (
             <Fragment>
-                <div className={styles.photoPanal}>
-                    <div className={styles.buttonPosition}>
-                        <Button onClick={this.handleClickShowPhoto}>{buttonName}</Button>
-                    </div>
+                <div>
                     {/* <Popover placement="rightBottom" trigger="click" title={photoDate} content={photoDes} overlayClassName={styles.tooltipStyle}>
                         <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, overflowY: 'auto'}} />
                     </Popover> */}
@@ -143,7 +129,7 @@ class Photo extends Component {
                         <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, cursor: 'pointer'}} />
                     </Tooltip> */}
                     {
-                        showPhoto ? <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild}} /> : ''
+                        showPhoto ? <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeight}} /> : ''
                     }
                 </div>
             </Fragment>
@@ -159,6 +145,5 @@ export default connect(
     }),
     {
         changePhotoDes: changePhotoDes,
-        changeShowPhoto: changeShowPhoto,
     }
 )(Photo);

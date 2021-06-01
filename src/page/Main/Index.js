@@ -5,6 +5,7 @@ import StopWatch from './Components/StopWatch/StopWatch';
 import Music from './Components/Music/Music';
 import Photo from './Components/Photo/Photo';
 import Dialog from './Components/Dialog/Dialog';
+// import Buttons from './Components/Buttons/Buttons';
 import {
     Link,
 } from 'react-router-dom';
@@ -148,6 +149,7 @@ class Main extends Component {
                             renderItem={item => <List.Item>{item}</List.Item>}
                         /> */}
                     </div>
+                    {/* <Buttons /> */}
                     {/* 调用音乐组件的函数 */}
                     <Music onRef={this.onRef} />
                     <Photo />
