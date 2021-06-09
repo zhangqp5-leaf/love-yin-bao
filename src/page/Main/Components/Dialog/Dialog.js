@@ -4,34 +4,32 @@ import {Divider} from 'antd';
 
 import styles from './Dialog.module.less';
 
-class Dialog extends Component {
-    render() {
-        const windowHeight = this.props.windowHeight / 4;
-        const photoDes = this.props.photoDes;
-        // console.log(photoDes);
-        return (
-            <Fragment>
-                <div
-                    style={{
-                        position: 'absolute',
-                        left: windowHeight,
-                        bottom: windowHeight / 2,
-                        maxHeight: windowHeight,
-                        minHeight: windowHeight / 2,
-                        maxWidth: '300px',
-                        minWidth: '200px',
-                        overflowX: 'auto',
-                        overflowY: 'auto',
-                    }}
-                    className={styles.dialog}
-                >
-                    <div>{photoDes.photoDes}</div>
-                    <Divider style={{border: '1px solid rgba(240, 240, 240, 100)', margin: '0px'}} />
-                    <div style={{position: 'absolute', right: '6px'}}>{photoDes.photoDate}</div>
-                </div>
-            </Fragment>
-        );
-    }
+// 对于简单组件只有一个render方法，并且不包含state，那么可以使用函数组件
+function Dialog(props) {
+    const windowHeight = props.windowHeight / 4;
+    const photoDes = props.photoDes;
+    return (
+        <Fragment>
+            <div
+                style={{
+                    position: 'absolute',
+                    left: windowHeight,
+                    bottom: windowHeight / 2,
+                    maxHeight: windowHeight,
+                    minHeight: windowHeight / 2,
+                    maxWidth: '300px',
+                    minWidth: '200px',
+                    overflowX: 'auto',
+                    overflowY: 'auto',
+                }}
+                className={styles.dialog}
+            >
+                <div>{photoDes.photoDes}</div>
+                <Divider style={{border: '1px solid rgba(240, 240, 240, 100)', margin: '0px'}} />
+                <div style={{position: 'absolute', right: '6px'}}>{photoDes.photoDate}</div>
+            </div>
+        </Fragment>
+    );
 }
 
 export default connect(
