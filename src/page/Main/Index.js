@@ -5,6 +5,7 @@ import StopWatch from './Components/StopWatch/StopWatch';
 import Music from './Components/Music/Music';
 import Photo from './Components/Photo/Photo';
 import Dialog from './Components/Dialog/Dialog';
+import One from './Components/One/One';
 // import Buttons from './Components/Buttons/Buttons';
 import {
     Link,
@@ -84,6 +85,7 @@ class Main extends Component {
                     <div className={styles.appTotleStyle}>
                         <StopWatch />
                     </div>
+                    <One />
                     {/* <Buttons /> */}
                     {/* 调用音乐组件的函数 */}
                     <Music onRef={this.onRef} />
