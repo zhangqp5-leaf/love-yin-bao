@@ -18,35 +18,35 @@ import './Index.css';
 
 import Rabbit from './img/Rabbit.png';
 
-const bingURI = 'https://jsonp.afeld.me/?callback=&url=https%3A%2F%2Fcn.bing.com%2FHPImageArchive.aspx%3Fformat%3Djs%26cc%3Djp%26idx%3D0%26n%3D1';
+// const bingURI = 'https://jsonp.afeld.me/?callback=&url=https%3A%2F%2Fcn.bing.com%2FHPImageArchive.aspx%3Fformat%3Djs%26cc%3Djp%26idx%3D0%26n%3D1';
 
 class Main extends Component {
 
-    state = {
-        backGround: '',
-    };
+    // state = {
+    //     backGround: '',
+    // };
 
     componentDidMount() {
         this.screenChange();
-        this.getImageURIBing();
+        // this.getImageURIBing();
     }
 
     // 请求图片
-    getImageURIBing = () => {
-        var config = {
-            method: 'get',
-            url: bingURI,
-        };
-        axios(config)
-            .then(response => {
-                this.setState({
-                    backGround: 'http://s.cn.bing.net' + response.data.images[0].url,
-                });
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
+    // getImageURIBing = () => {
+    //     var config = {
+    //         method: 'get',
+    //         url: bingURI,
+    //     };
+    //     axios(config)
+    //         .then(response => {
+    //             this.setState({
+    //                 backGround: 'http://s.cn.bing.net' + response.data.images[0].url,
+    //             });
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         });
+    // }
 
     // 背景图监听窗体改变事件
     screenChange = () => {
@@ -70,7 +70,8 @@ class Main extends Component {
     }
 
     render() {
-        const {backGround} = this.state;
+        // const {backGround} = this.state;
+        const backGround = 'https://api.sunweihu.com/api/bing1/api.php';
         const {windowHeight, showPhoto} = this.props;
         const windowHeightRabbit = windowHeight / 4;
         const sectionStyle = {
