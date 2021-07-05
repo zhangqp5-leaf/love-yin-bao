@@ -31,6 +31,8 @@ class One extends Component {
             });
     }
 
+
+
     render() {
         const {oneSentance} = this.state;
         return (
