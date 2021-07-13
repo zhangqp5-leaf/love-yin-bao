@@ -22,31 +22,13 @@ import Rabbit from './img/Rabbit.png';
 
 class Main extends Component {
 
-    // state = {
-    //     backGround: '',
-    // };
+    state = {
+        windowWidth: document.body.clientWidth,
+    };
 
     componentDidMount() {
         this.screenChange();
-        // this.getImageURIBing();
     }
-
-    // 请求图片
-    // getImageURIBing = () => {
-    //     var config = {
-    //         method: 'get',
-    //         url: bingURI,
-    //     };
-    //     axios(config)
-    //         .then(response => {
-    //             this.setState({
-    //                 backGround: 'http://s.cn.bing.net' + response.data.images[0].url,
-    //             });
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         });
-    // }
 
     // 背景图监听窗体改变事件
     screenChange = () => {
@@ -55,6 +37,10 @@ class Main extends Component {
 
     resize = () => {
         this.props.changeWindowHeight(document.body.clientHeight);
+        const windowWidth = document.body.clientWidth;
+        this.setState({
+            windowWidth: windowWidth,
+        });
     }
 
     componentWillUnMount() {
@@ -72,6 +58,7 @@ class Main extends Component {
     render() {
         // const {backGround} = this.state;
         const backGround = 'https://api.sunweihu.com/api/bing1/api.php';
+        const {windowWidth} = this.state;
         const {windowHeight, showPhoto} = this.props;
         const windowHeightRabbit = windowHeight / 4;
         const sectionStyle = {
