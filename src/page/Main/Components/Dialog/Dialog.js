@@ -25,8 +25,8 @@ function Dialog(props) {
                 className={styles.dialog}
             >
                 <div>{photoDes.photoDes}</div>
-                <Divider style={{border: '1px solid rgba(240, 240, 240, 100)', margin: '0px'}} />
-                <div style={{position: 'absolute', right: '6px'}}>{photoDes.photoDate}</div>
+                <Divider className={styles.dialogContent} />
+                <div className={styles.dialogDate}>{photoDes.photoDate}</div>
             </div>
         </Fragment>
     );

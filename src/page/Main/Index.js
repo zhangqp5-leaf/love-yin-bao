@@ -56,7 +56,6 @@ class Main extends Component {
     }
 
     render() {
-        // const {backGround} = this.state;
         const backGround = 'https://api.sunweihu.com/api/bing1/api.php';
         const {windowWidth} = this.state;
         const {windowHeight, showPhoto} = this.props;
@@ -70,7 +69,7 @@ class Main extends Component {
             <Fragment>
                 <div style={sectionStyle}></div>
                 <div className={styles.container}>
-                    <div className={styles.appTotleStyle}>
+                    <div className={styles.stopWatchStyle}>
                         <StopWatch />
                     </div>
                     <One />
