@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {Button, Tooltip, Popover, Divider} from 'antd';
 import {connect} from 'react-redux';
-import {changePhotoDes} from '../../../../Redux/Actions/PhotoDes';
+import {changePhotoDes} from '../../../../Redux/Main/main';
 
 import photo1 from '../../img/photo/IMG_0604.JPG';
 import photo2 from '../../img/photo/IMG_0650.JPG';
@@ -84,7 +84,8 @@ class Photo extends Component {
         for (var i = 0; i < photoList.length; i++) {
             if (photoList[i] === photoAfter) {
                 const photoDesData = {photoDes: this.state.photoDesList[i], photoDate: this.state.photoDateList[i]};
-                this.props.changePhotoDes(photoDesData);
+                const {changePhotoDes} = this.props;
+                changePhotoDes(photoDesData);
             }
         };
     }
@@ -137,13 +138,16 @@ class Photo extends Component {
     }
 }
 
+
 export default connect(
     state => ({
-        windowHeight: state.WindowHeight,
-        photoDes: state.PhotoDes,
-        showPhoto: state.ShowPhoto,
+        windowHeight: state.main.windowHeight,
+        photoDes: state.main.photoDes,
+        showPhoto: state.main.showPhoto,
     }),
-    {
-        changePhotoDes: changePhotoDes,
-    }
+    dispatch => ({
+        changePhotoDes: data => {
+            dispatch(changePhotoDes(data));
+        },
+    })
 )(Photo);

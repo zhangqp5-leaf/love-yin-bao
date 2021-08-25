@@ -7,7 +7,7 @@ import ReactAPlayer from 'react-aplayer';
 import {
     connect,
 } from 'react-redux';
-import {changeShowPhoto} from '../../../../Redux/Actions/ShowPhoto';
+import {changeShowPhoto} from '../../../../Redux/Main/main';
 
 import img1 from '../../img/music/musicImg/Snipaste_2021-04-07_11-50-31.png';
 import img2 from '../../img/music/musicImg/Snipaste_2021-04-07_12-16-46.png';
@@ -271,9 +271,11 @@ class Music extends Component {
 
 export default connect(
     state => ({
-        showPhoto: state.ShowPhoto,
+        showPhoto: state.main.showPhoto,
     }),
-    {
-        changeShowPhoto: changeShowPhoto,
-    }
+    dispatch => ({
+        changeShowPhoto: data => {
+            dispatch(changeShowPhoto(data));
+        },
+    })
 )(Music);

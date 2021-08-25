@@ -11,7 +11,7 @@ import {
     Link,
 } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {changeWindowHeight} from '../../Redux/Actions/WindowHeight';
+import {changeWindowHeight} from '../../Redux/Main/main';
 
 import styles from './Index.module.less';
 import './Index.css';
@@ -93,12 +93,30 @@ class Main extends Component {
     }
 }
 
+// const mapStateToProps = (state, ownProps) => {
+//     return {
+//         windowHeight: state.main.windowHeight,
+//         showPhoto: state.main.showPhoto,
+//     };
+// };
+
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//     return {
+//         changeWindowHeight: data => {
+//             dispatch(changeWindowHeight(data));
+//         },
+//     };
+// };
+
 export default connect(
     state => ({
-        windowHeight: state.WindowHeight,
-        showPhoto: state.ShowPhoto,
+        windowHeight: state.main.windowHeight,
+        showPhoto: state.main.showPhoto,
     }),
-    {
-        changeWindowHeight: changeWindowHeight,
-    }
+    dispatch => ({
+        changeWindowHeight: data => {
+            dispatch(changeWindowHeight(data));
+        },
+    })
 )(Main);
+

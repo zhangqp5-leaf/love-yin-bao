@@ -34,8 +34,8 @@ function Dialog(props) {
 
 export default connect(
     state => ({
-        windowHeight: state.WindowHeight,
-        photoDes: state.PhotoDes,
+        windowHeight: state.main.windowHeight,
+        photoDes: state.main.photoDes,
     }),
     {}
 )(Dialog);

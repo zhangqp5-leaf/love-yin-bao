@@ -244,7 +244,7 @@ class CalendarInfo extends Component {
 
 export default connect(
     state => ({
-        windowHeight: state.WindowHeight,
+        windowHeight: state.main.windowHeight,
     }),
     {}
 )(CalendarInfo);
