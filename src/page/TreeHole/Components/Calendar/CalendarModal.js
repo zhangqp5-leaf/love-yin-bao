@@ -9,7 +9,7 @@ const {Option} = Select;
 const CalendarModal = props => {
 
     const [contentInputValueList, setContentInputValueList] = useState([]);
-    const [isShowAdd, setIsShowAdd] = useState(true);
+    const [currPanal, setCurrPanal] = useState('add');
     const [selectValue, setSelectValue] = useState('Rose');
 
     // 点击Modal  OK button
@@ -33,8 +33,9 @@ const CalendarModal = props => {
     };
 
     // modal内事件函数
-    const clickShowAdd = () => {
-        setIsShowAdd(!isShowAdd);
+    const clickShowAdd = e => {
+        // setIsShowAdd(!isShowAdd);
+        setCurrPanal(e.target.value);
     };
 
     const handleChangeSelect = value => {
@@ -52,10 +53,16 @@ const CalendarModal = props => {
             </Tooltip>
         </span>
     );
+    // 设置button的控制map
+    const buttonMap = {
+        'add': CalendarModalInput,
+        'view': CalendarModalList,
+    };
+    const ButtonDom = buttonMap[currPanal] || buttonMap.add;
     return (
         <Modal title={modalTitle} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} maskClosable={false}>
             <div>
-                <Radio.Group defaultValue={isShowAdd ? 'add' : 'view'} buttonStyle="solid" onChange={clickShowAdd}>
+                <Radio.Group defaultValue='add' value={currPanal} buttonStyle="solid" onChange={clickShowAdd}>
                     <Radio.Button value='add'>添加今日事件</Radio.Button>
                     <Radio.Button value='view'>查看今日事件</Radio.Button>
                 </Radio.Group>&nbsp;
@@ -63,17 +70,17 @@ const CalendarModal = props => {
                     <Option value="Jack">启鹏</Option>
                     <Option value="Rose">赛男</Option>
                 </Select>
-                {
-                    isShowAdd ? <CalendarModalInput
-                        contentInputValueList={contentInputValueList}
-                        setContentInputValueList={setContentInputValueList}
-                    /> : <CalendarModalList
-                        totleValue={totleValue}
-                        nowYear={nowYear}
-                        nowMonth={nowMonth}
-                        nowDay={nowDay}
-                    />
-                }
+                <ButtonDom
+                    key={currPanal}
+                    // Input组件用参
+                    contentInputValueList={contentInputValueList}
+                    setContentInputValueList={setContentInputValueList}
+                    // List组件用参
+                    totleValue={totleValue}
+                    nowYear={nowYear}
+                    nowMonth={nowMonth}
+                    nowDay={nowDay}
+                />
             </div>
         </Modal>
     );
