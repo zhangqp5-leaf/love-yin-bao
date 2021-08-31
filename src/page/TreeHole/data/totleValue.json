@@ -274,7 +274,10 @@
             "28": [],
             "29": [],
             "30": [],
-            "31": []
+            "31": [
+                {"type": "success", "content": "This is success event."},
+                {"type": "warning", "content": "This is warning event."}
+            ]
         },
         "9": {
             "1": [],
