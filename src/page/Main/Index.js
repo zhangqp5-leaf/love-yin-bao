@@ -56,7 +56,7 @@ class Main extends Component {
     }
 
     render() {
-        const backGround = 'https://api.sunweihu.com/api/bing1/api.php';
+        const backGround = 'https://api.dujin.org/bing/1920.php';
         const {windowWidth} = this.state;
         const {windowHeight, showPhoto} = this.props;
         const windowHeightRabbit = windowHeight / 4;

@@ -5,7 +5,7 @@ import {Divider} from 'antd';
 import styles from './Dialog.module.less';
 
 // 对于简单组件只有一个render方法，并且不包含state，那么可以使用函数组件
-function Dialog(props) {
+const Dialog = props => {
     const windowHeight = props.windowHeight / 4;
     const photoDes = props.photoDes;
     return (
@@ -30,7 +30,7 @@ function Dialog(props) {
             </div>
         </Fragment>
     );
-}
+};
 
 export default connect(
     state => ({

@@ -3,30 +3,21 @@ import API from '../Api';
 
 import styles from './One.module.less';
 
-class One extends Component {
+const One = props => {
+    const [oneSentance, setOneSentance] = useState('');
 
-    state = {
-        oneSentance: '',
+    useEffect(() => {
+        getOneSentance();
+    }, []);
+
+    const getOneSentance = async () => {
+        const data = await API.getOneSentance();
+        setOneSentance(data);
     };
 
-    componentDidMount() {
-        this.getOneSentance();
-    }
-
-    getOneSentance = async () => {
-        const self = this;
-        const data = await API.getOneSentance();
-        self.setState({
-            oneSentance: data,
-        });
-    }
-
-    render() {
-        const {oneSentance} = this.state;
-        return (
-            <div className={styles.onePanal}>{oneSentance}</div>
-        );
-    }
-}
+    return (
+        <div className={styles.onePanal}>{oneSentance}</div>
+    );
+};
 
 export default One;

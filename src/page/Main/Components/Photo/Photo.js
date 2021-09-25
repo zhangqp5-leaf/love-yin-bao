@@ -90,8 +90,6 @@ class Photo extends Component {
         };
     }
 
-
-
     // 页面加载前转换数据格式
     preChangePhotoList = () => {
         let photoListBak = JSON.parse(JSON.stringify(this.state.photoList));
@@ -110,25 +108,11 @@ class Photo extends Component {
     }
 
     render() {
-        // console.log(this.state.photoDesList);
         const {photo} = this.state;
         const {windowHeight, showPhoto} = this.props;
-        // const content = (
-        //     <div>
-        //         <div>{photoDes.photoDate}</div>
-        //         <Divider style={{border: '0.01px solid rgba(240, 240, 240, 100)', left: '24px', right: '24px', margin: '0px'}} />
-        //         <div>{photoDes.photoDes}</div>
-        //     </div>
-        // );
         return (
             <Fragment>
                 <div>
-                    {/* <Popover placement="rightBottom" trigger="click" title={photoDate} content={photoDes} overlayClassName={styles.tooltipStyle}>
-                        <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, overflowY: 'auto'}} />
-                    </Popover> */}
-                    {/* <Tooltip placement="rightBottom" trigger="click" title={content} overlayClassName={styles.tooltipStyle} defaultVisible='true'>
-                        <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeightChild, cursor: 'pointer'}} />
-                    </Tooltip> */}
                     {
                         showPhoto ? <img src={photo} className={styles.photoPosition} style={{maxHeight: windowHeight}} /> : ''
                     }
